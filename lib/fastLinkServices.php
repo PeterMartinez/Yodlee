@@ -1,6 +1,6 @@
 <?php
 namespace Yodlee;
-class oAuthToken{
+class fastLinkServices{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "jsonsdk/OAuthAccessTokenManagementService/getOAuthAccessToken";	
 	//START Static From Documentaiton, never changes

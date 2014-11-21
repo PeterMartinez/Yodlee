@@ -9,9 +9,12 @@ include("lib/session/userSessionToken.php");
 
 //API Libs
 include("lib/coreServices.php");
-include("lib/oAuthServices.php");
+include("lib/fastLinkServices.php");
 include("lib/containerServices.php");
 include("lib/siteServices.php");
+include("lib/dataExtractServices.php");
+
+
 
 //Config, Session and External Libs
 use Yodlee\Conf as Conf;
@@ -21,15 +24,18 @@ use Yodlee\userSessionToken as userSessionToken;
 
 //API Libs
 use Yodlee\coreService as coreService;
-use Yodlee\oAuthToken as oAuthToken;
+use Yodlee\fastLinkServices as fastLinkServices;
 use Yodlee\containerServices as containerServices;
 use Yodlee\siteServices as siteServices;
+use Yodlee\dataExtractServices as dataExtractServices;
 
 class API{
     private $cobSessionToken;
     private $containerServices;
     private $coreServices;
     private $siteServices;
+    private $dataExtractServices;
+
 
     public function __construct(){
         $GLOBALS['YodleeConfig'] = new Conf;//Set YodleeConfig Global
@@ -37,9 +43,9 @@ class API{
     }
 
 
-    public function getOAuthToken(){
-        $oAuthToken = new oAuthToken($this->cobSessionToken,$this->coreServices->UserSession());
-        return $oAuthToken->getToken();
+    public function FastLinkServices(){
+        $fastLinkServices = new fastLinkServices($this->cobSessionToken,$this->coreServices->UserSession());
+        return $fastLinkServices->getToken();
     }
 
     public function ContainerServices(){
@@ -56,6 +62,13 @@ class API{
         $this->siteServices = ($this->siteServices != null)? $this->siteServices : new siteServices($this->cobSessionToken);
         return $this->siteServices;
     }
+
+    public function DataExtractServices(){
+        $this->dataExtractServices = ($this->dataExtractServices != null)? $this->dataExtractServices : new dataExtractServices($this->cobSessionToken);
+        return $this->dataExtractServices;
+    }
+
+    
 
         
 }
