@@ -31,18 +31,15 @@ class containerServices{
 			$data['notrim'] = $notrim;
 
 		$response =  $this->SimpleRestJSON->post($GLOBALS['YodleeConfig']->COBURL.$endpoint, $data);
-		debug($response);
-		// try {
-		// 	if(isset($response['cobrandConversationCredentials']['sessionToken'])){
-		// 		$this->token = $response['cobrandConversationCredentials']['sessionToken'];
-		// 		$this->expires= date("U");
-		// 		return $this->token;					
-		// 	}
-		// 	else {
-		// 		throw new Exception($response['Error'][0]['errorDetail']);
-		// 	}
-		// }catch (Exception $e) {
-		// 	    echo 'Caught exception: ',  $e->getMessage(), "\n";
-		// }
+		try {
+			if(isset($response[0])){
+				return $response;					
+			}
+			else {
+				throw new Exception($response['Error'][0]['errorDetail']);
+			}
+		}catch (Exception $e) {
+			    echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
 	} 
 }
