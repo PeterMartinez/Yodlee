@@ -45,7 +45,7 @@ class API{
 
     public function FastLinkServices(){
         $fastLinkServices = new fastLinkServices($this->cobSessionToken,$this->coreServices->UserSession());
-        return $fastLinkServices->getToken();
+        return $fastLinkServices->getFastLinkURL();
     }
 
     public function ContainerServices(){

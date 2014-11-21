@@ -4,6 +4,7 @@ class fastLinkServices{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "jsonsdk/OAuthAccessTokenManagementService/getOAuthAccessToken";	
 	//START Static From Documentaiton, never changes
+	private $fastLinkBase = "https://fastlink.yodlee.com/appscenter/fastlinksb/linkAccount.fastlinksb.action";	
 	private  $bridgeAppID = "10003200";
 	private $oAuthKey = "a458bdf184d34c0cab7ef7ffbb5f016b";
 	private $oAuthSecret = "1ece74e1ca9e4befbb1b64daba7c4a24";
@@ -22,7 +23,44 @@ class fastLinkServices{
  		$this->userSessionToken = $userSessionToken; 	
  	}
 
-	public function getToken(){
+ 	public function getFastLinkURL(){
+
+ 		$tokens = $this->getToken();
+ 		$oauthVersion = "1.0";
+		$oauthSignatureMethod = "HMAC-SHA1"; 
+		$accessTokenUrl = $this->fastLinkBase; 
+		$nonce = md5(mt_rand()); 
+		$oauthTimestamp = time();
+
+
+		$sigBase = "GET&" . rawurlencode($accessTokenUrl)
+		    .'&access_type%3Doauthdeeplink%26'	
+		    .'displayMode%3Ddesktop%26'
+		    .'oauth_callback%3DOOB%26'
+		    ."oauth_consumer_key%3D". rawurlencode($this->oAuthKey).'%26'
+		    ."oauth_nonce%3D" . rawurlencode($nonce).'%26'
+		    ."oauth_signature_method%3D" . rawurlencode($oauthSignatureMethod).'%26'
+		    ."oauth_timestamp%3D" . rawurlencode($oauthTimestamp).'%26'
+		    ."oauth_token%3D" . rawurlencode($tokens['token']).'%26'
+		    ."oauth_version%3D" . rawurlencode($oauthVersion); 
+		$sigKey= $this->oAuthSecret."&".$tokens['secret'];
+		$oauthSig = base64_encode(hash_hmac("sha1",$sigBase, $sigKey, TRUE));
+		$requestUrl = $accessTokenUrl . "?"
+		    .'&access_type=oauthdeeplink'		    
+		    .'&displayMode=desktop'		    
+		    .'&oauth_callback=OOB'		    
+		    .'&oauth_consumer_key='.rawurlencode($this->oAuthKey)		    
+		    .'&oauth_nonce=' . rawurlencode($nonce)		    
+		    ."&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
+		    ."&oauth_timestamp=" . rawurlencode($oauthTimestamp)
+		    ."&oauth_token=" . rawurlencode($tokens["token"])
+		    ."&oauth_version=". rawurlencode($oauthVersion)
+		    ."&oauth_signature=" . $oauthSig; 
+
+		return $requestUrl;
+ 	}
+
+	private function getToken(){
     		$data = array();
 			$data['bridgetAppId'] = $this->bridgeAppID;
 			$data['userSessionToken'] = $this->userSessionToken->getToken();
