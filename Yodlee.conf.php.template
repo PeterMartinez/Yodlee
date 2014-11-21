@@ -1,0 +1,8 @@
+<?php
+class YodleeConf{
+	public $AppID = "";//Yodlee App ID
+	public $COBID = "";//CoBrand ID	
+	public $COBUsername = "";//CoBrand Username
+	public $COBPassword = "";//CoBrand Password
+	public $COBURL = "";
+}
