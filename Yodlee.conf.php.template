@@ -1,5 +1,6 @@
 <?php
-class YodleeConf{
+namespace Yodlee;
+class Conf{
 	public $AppID = "";//Yodlee App ID
 	public $COBID = "";//CoBrand ID	
 	public $COBUsername = "";//CoBrand Username
