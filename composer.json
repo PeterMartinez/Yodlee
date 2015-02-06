@@ -11,9 +11,12 @@
         "php": ">=5.4.0"
     },
     "autoload": {
-        "psr-0": {
-            "Yodlee": "src/"
-        }
+     "psr-4": {
+            "Yodlee\\": ""
+        },
+        "files": [
+            "src\Yodlee.php"
+        ]
     }
 }
 
