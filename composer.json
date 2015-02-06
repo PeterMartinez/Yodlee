@@ -1,6 +1,6 @@
 {
     "name": "PeterMartinez/Yodlee",
-    "description": "Simple Yodlee PHP SDK",
+    "description": "Simple Yodlee SDK",
     "authors": [
         {
             "name": "Peter Martinez",
@@ -8,8 +8,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-    },
-    "minimum-stability": "stable"
+        "php": ">=5.4.0"
+    }
 }
 
