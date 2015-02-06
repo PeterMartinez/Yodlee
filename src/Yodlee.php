@@ -2,7 +2,6 @@
 namespace Yodlee;
 
 //Config, Session and External Libs
-include("Yodlee.conf.php");
 include("lib/external/simpleRestJSON.php");
 include("lib/session/cobSessionToken.php");
 include("lib/session/userSessionToken.php");
@@ -17,7 +16,6 @@ include("lib/dataExtractServices.php");
 
 
 //Config, Session and External Libs
-use Yodlee\Conf as Conf;
 use Yodlee\SimpleRestJSON as SimpleRestJSON;
 use Yodlee\cobSessionToken as cobSessionToken;
 use Yodlee\userSessionToken as userSessionToken;
@@ -29,6 +27,28 @@ use Yodlee\containerServices as containerServices;
 use Yodlee\siteServices as siteServices;
 use Yodlee\dataExtractServices as dataExtractServices;
 
+
+ini_set('memory_limit', '512M');//Some API Calls are huge
+class Conf{
+    public $AppID = "";//Yodlee App ID
+    public $COBID = "";//CoBrand ID 
+    public $COBUsername = "";//CoBrand Username
+    public $COBPassword = "";//CoBrand Password
+    public $COBURL = "";
+
+    public function __construct($conf)
+    {
+        $this->AppID = $conf['AppID'];
+        $this->COBID = $conf['COBID'];
+        $this->COBUsername = $conf['COBUsername'];
+        $this->COBPassword = $conf['COBPassword'];
+        $this->COBURL = $conf['COBURL'];
+        
+    }
+}
+
+
+
 class API{
     private $cobSessionToken;
     private $containerServices;
@@ -36,9 +56,9 @@ class API{
     private $siteServices;
     private $dataExtractServices;
 
-
-    public function __construct(){
-        $GLOBALS['YodleeConfig'] = new Conf;//Set YodleeConfig Global
+    //Conf => Namespace Yodlee/Conf
+    public function __construct($Conf){
+        $GLOBALS['YodleeConfig'] = $Conf;
         $this->cobSessionToken = new cobSessionToken(); //Generate Co Brand Tokens
     }
 
