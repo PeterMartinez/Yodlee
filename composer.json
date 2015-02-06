@@ -1,0 +1,7 @@
+{
+    "name": "PeterMartinez/Yodlee",
+    "description": "Simple Yodlee PHP SDK",
+    "require": {
+        "php": ">=5.3.0",
+    }
+}
