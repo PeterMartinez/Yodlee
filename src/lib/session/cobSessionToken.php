@@ -3,11 +3,9 @@ namespace YodleeSDK;
 class cobSessionToken{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "authenticate/coblogin";	
-    	private  $expires;
 
  	public function __construct(){
  		$this->SimpleRestJSON = new SimpleRestJSON(); 		
- 		$this->expires = null;
 		$this->refresh(); 
  	}
 
@@ -17,7 +15,7 @@ class cobSessionToken{
 
 
 	private function is_expired(){
-		return ((date("U")-3600000) > $this->expires || !isset($_SESSION['YodleeSDK']['cobSessionToken']))? true : false;//1 hour/3600000MS
+		return ((date("U")-3600000) > $_SESSION['YodleeSDK']['cobSessionToken_expire'] || !isset($_SESSION['YodleeSDK']['cobSessionToken']))? true : false;//1 hour/3600000MS
 	}
 
 	private function refresh(){
@@ -28,7 +26,7 @@ class cobSessionToken{
 		try {
 			if(isset($response['cobrandConversationCredentials']['sessionToken'])){
 				$_SESSION['YodleeSDK']['cobSessionToken'] = $response['cobrandConversationCredentials']['sessionToken'];				
-				$this->expires= date("U");
+				$_SESSION['YodleeSDK']['cobSessionToken_expire'] = date("U");
 				return $_SESSION['YodleeSDK']['cobSessionToken'];					
 			}
 			else {

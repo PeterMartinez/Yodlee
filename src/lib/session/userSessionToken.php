@@ -6,11 +6,9 @@ class userSessionToken{
 	private $username;
 	private $password;
     	private  $cobSessionToken;
-    	private  $expires;
 
  	public function __construct($username,$password,$cobSessionToken){
  		$this->SimpleRestJSON = new SimpleRestJSON(); 		
- 		$this->expires = null;
  		$this->username = $username;
  		$this->password = $password;
  		$this->cobSessionToken = $cobSessionToken;
@@ -22,7 +20,7 @@ class userSessionToken{
 
 
 	private function is_expired(){
-		return ((date("U")-3600000) > $this->expires || !isset($_SESSION['YodleeSDK']['userSessionToken']))? true : false;//1 hour/3600000MS
+		return ((date("U")-3600000) > $_SESSION['YodleeSDK']['userSessionToken_expire'] || !isset($_SESSION['YodleeSDK']['userSessionToken']))? true : false;//1 hour/3600000MS
 	}
 
 	private function refresh(){
@@ -35,7 +33,7 @@ class userSessionToken{
 		try {
 			if(isset($response['userContext']['conversationCredentials']['sessionToken'])){
 				$_SESSION['YodleeSDK']['userSessionToken'] = $response['userContext']['conversationCredentials']['sessionToken'];
-				$this->expires= date("U");
+				$_SESSION['YodleeSDK']['userSessionToken_expire'] = date("U");
 				return $_SESSION['YodleeSDK']['userSessionToken'];	
 			}
 			else {
