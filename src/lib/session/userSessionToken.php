@@ -9,12 +9,11 @@ class userSessionToken{
 	private $token = null;
 
  	public function __construct($username,$password,$cobSessionToken){
- 		$_SESSION['YodleeSDK_userSessionToken_expire'] = (!isset($_SESSION['YodleeSDK_userSessionToken_expire']))? null : $_SESSION['YodleeSDK_userSessionToken_expire'];
- 		$_SESSION['YodleeSDK_userSessionToken'] = (!isset($_SESSION['YodleeSDK_userSessionToken']))? null : $_SESSION['YodleeSDK_userSessionToken'];
  		$this->SimpleRestJSON = new SimpleRestJSON(); 		
  		$this->username = $username;
  		$this->password = $password;
  		$this->cobSessionToken = $cobSessionToken;
+ 		$this->refresh();
  	}
 
  	public function getToken(){
