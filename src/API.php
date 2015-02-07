@@ -28,7 +28,7 @@ use YodleeSDK\siteServices as siteServices;
 use YodleeSDK\dataExtractServices as dataExtractServices;
 
 class API{
-    private $cobSessionToken;
+    private $cobSessionToken = null;
     private $containerServices;
     private $coreServices;
     private $siteServices;
@@ -37,31 +37,37 @@ class API{
     //Conf => Namespace Yodlee/Conf
     public function __construct($Conf){
         $GLOBALS['YodleeConfig'] = $Conf;
-        $this->cobSessionToken = new cobSessionToken(); //Generate Co Brand Tokens
     }
 
-
+    private function setCobSession(){
+        $this->cobSessionToken = ($this->cobSessionToken == null)? new cobSessionToken() : $this->cobSessionToken;
+    }
     public function FastLinkServices(){
+        $this->setCobSession();
         $fastLinkServices = new fastLinkServices($this->cobSessionToken,$this->coreServices->UserSession());
         return $fastLinkServices->getFastLinkURL();
     }
 
     public function ContainerServices(){
+        $this->setCobSession();        
         $this->containerServices = ($this->containerServices != null)? $this->containerServices : new containerServices($this->cobSessionToken);
         return $this->containerServices;
     }
 
     public function CoreServices(){
+        $this->setCobSession();        
         $this->coreServices = ($this->coreServices != null)? $this->coreServices : new coreServices($this->cobSessionToken);
         return $this->coreServices;
     }
 
     public function SiteServices(){
+        $this->setCobSession();        
         $this->siteServices = ($this->siteServices != null)? $this->siteServices : new siteServices($this->cobSessionToken);
         return $this->siteServices;
     }
 
     public function DataExtractServices(){
+        $this->setCobSession();        
         $this->dataExtractServices = ($this->dataExtractServices != null)? $this->dataExtractServices : new dataExtractServices($this->cobSessionToken);
         return $this->dataExtractServices;
     }

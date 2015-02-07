@@ -6,6 +6,7 @@ class userSessionToken{
 	private $username;
 	private $password;
     	private  $cobSessionToken;
+	private $token = null;
 
  	public function __construct($username,$password,$cobSessionToken){
  		$_SESSION['YodleeSDK_userSessionToken_expire'] = (!isset($_SESSION['YodleeSDK_userSessionToken_expire']))? null : $_SESSION['YodleeSDK_userSessionToken_expire'];
@@ -17,13 +18,9 @@ class userSessionToken{
  	}
 
  	public function getToken(){
- 		return ($this->is_expired())? $this->refresh() : $_SESSION['YodleeSDK_userSessionToken'];
+ 		return $this->token;
  	}
 
-
-	private function is_expired(){
-		return ((date("U")-3600000) > $_SESSION['YodleeSDK_userSessionToken_expire'] || $_SESSION['YodleeSDK_userSessionToken'] == null)? true : false;//1 hour/3600000MS
-	}
 
 	private function refresh(){
     		$data = array();
@@ -34,9 +31,8 @@ class userSessionToken{
 		$response =  $this->SimpleRestJSON->post($GLOBALS['YodleeConfig']->COBURL.$this->endpoint, $data);
 		try {
 			if(isset($response['userContext']['conversationCredentials']['sessionToken'])){
-				$_SESSION['YodleeSDK_userSessionToken'] = $response['userContext']['conversationCredentials']['sessionToken'];
-				$_SESSION['YodleeSDK_userSessionToken_expire'] = date("U");
-				return $_SESSION['YodleeSDK_userSessionToken'];	
+				$this->token = $response['userContext']['conversationCredentials']['sessionToken'];
+				return $this->token;	
 			}
 			else {
 				throw new Exception($response['Error'][0]['errorDetail']);
