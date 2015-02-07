@@ -1,5 +1,5 @@
 <?php
-namespace Yodlee;
+namespace YodleeSDK;
 
 //Config, Session and External Libs
 include("lib/external/simpleRestJSON.php");
@@ -16,16 +16,16 @@ include("lib/dataExtractServices.php");
 
 
 //Config, Session and External Libs
-use Yodlee\SimpleRestJSON as SimpleRestJSON;
-use Yodlee\cobSessionToken as cobSessionToken;
-use Yodlee\userSessionToken as userSessionToken;
+use YodleeSDK\SimpleRestJSON as SimpleRestJSON;
+use YodleeSDK\cobSessionToken as cobSessionToken;
+use YodleeSDK\userSessionToken as userSessionToken;
 
 //API Libs
-use Yodlee\coreService as coreService;
-use Yodlee\fastLinkServices as fastLinkServices;
-use Yodlee\containerServices as containerServices;
-use Yodlee\siteServices as siteServices;
-use Yodlee\dataExtractServices as dataExtractServices;
+use YodleeSDK\coreService as coreService;
+use YodleeSDK\fastLinkServices as fastLinkServices;
+use YodleeSDK\containerServices as containerServices;
+use YodleeSDK\siteServices as siteServices;
+use YodleeSDK\dataExtractServices as dataExtractServices;
 
 
 ini_set('memory_limit', '512M');//Some API Calls are huge

@@ -1,5 +1,5 @@
 <?php
-namespace Yodlee;
+namespace YodleeSDK;
 class userSessionToken{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "authenticate/login";	

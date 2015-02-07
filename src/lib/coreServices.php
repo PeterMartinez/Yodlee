@@ -1,5 +1,5 @@
 <?php
-namespace Yodlee;
+namespace YodleeSDK;
 class coreServices{
 	private  $SimpleRestJSON;	
 	private  $cobSessionToken;	

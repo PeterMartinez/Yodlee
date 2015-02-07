@@ -1,5 +1,5 @@
 <?php
-namespace Yodlee;
+namespace YodleeSDK;
 class dataExtractServices{
 	private  $SimpleRestJSON;	
 	private  $cobSessionToken;	

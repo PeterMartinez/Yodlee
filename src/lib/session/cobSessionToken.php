@@ -1,5 +1,5 @@
 <?php 
-namespace Yodlee;
+namespace YodleeSDK;
 class cobSessionToken{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "authenticate/coblogin";	

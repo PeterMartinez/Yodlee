@@ -1,5 +1,5 @@
 <?php
-namespace Yodlee;
+namespace YodleeSDK;
 class SimpleRestJSON{
 	private $ch;
 	public function __construct(){
