@@ -2,7 +2,7 @@
 namespace YodleeSDK;
 
 ini_set('memory_limit', '512M');//Some API Calls are huge
-class Conf{
+class Config{
     
     public $AppID = "";//Yodlee App ID
     public $COBID = "";//CoBrand ID 
