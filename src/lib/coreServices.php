@@ -18,8 +18,25 @@ class coreServices{
 
 	public function UserSession(){
     		return $this->userSessionToken;
-    	}    	
+    	}  
 
+
+    	/*
+ 		Function: registerUser
+		Description: 
+		This REST API accepts a consumer's details to register the consumer in the Yodlee system. User profile information and user preferences can also be set during the registration process. 
+		
+		//TODO PETER, add optional fields to request. 
+		Parameters: 
+			- cobSessionToken 
+			- userCredentials.loginName
+			- userCredentials.password
+			- userProfile.emailAddress
+		More: http://developer.yodlee.com/Aggregation_API/Aggregation_Services_Guide/Aggregation_REST_API_Reference/register3
+ 	*/
+	public function registerUser($params){
+
+	}
 
  	/*
  		Function: accountSummary
@@ -34,8 +51,6 @@ class coreServices{
     		$data = array();
 			$data['cobSessionToken'] = $this->cobSessionToken->getToken();
 			$data['userSessionToken'] = $this->userSessionToken->getToken();
-
-			echo $GLOBALS['YodleeConfig']->COBURL.$endpoint;
 
 		$response =  $this->SimpleRestJSON->get($GLOBALS['YodleeConfig']->COBURL.$endpoint, $data);
 		try {
