@@ -35,6 +35,25 @@ class coreServices{
 		More: http://developer.yodlee.com/Aggregation_API/Aggregation_Services_Guide/Aggregation_REST_API_Reference/register3
  	*/
 	public function registerUser($params){
+		$endpoint = "jsonsdk/UserRegistration/register3";
+    		$data = array();
+			$data['userCredentials.loginName'] = $params['username'];				
+			$data['userCredentials.password'] = $params['password'];				
+			$data['userCredentials.emailAddress'] = $params['email'];				
+			$data['cobSessionToken'] = $this->cobSessionToken->getToken();				
+
+		$response =  $this->SimpleRestJSON->get($GLOBALS['YodleeConfig']->COBURL.$endpoint, $data);
+		print_R($response);
+		try {
+			if(isset($response['ItemContainer'])){
+				return $response;					
+			}
+			else {
+				throw new Exception($response['Error'][0]['errorDetail']);
+			}
+		}catch (Exception $e) {
+			    echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
 
 	}
 
