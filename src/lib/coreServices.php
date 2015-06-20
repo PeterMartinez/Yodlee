@@ -37,15 +37,15 @@ class coreServices{
 	public function registerUser($params){
 		$endpoint = "jsonsdk/UserRegistration/register3";
     		$data = array();
-			$data['userCredentials.loginName'] = $params['username'];				
-			$data['userCredentials.password'] = $params['password'];				
-			$data['userCredentials.emailAddress'] = $params['email'];				
-			$data['cobSessionToken'] = $this->cobSessionToken->getToken();				
+                        		$data['userCredentials.objectInstanceType'] = 'com.yodlee.ext.login.PasswordCredentials';
+                        		$data['userCredentials.loginName'] = $params['username'];
+                        		$data['userCredentials.password'] = $params['password'];
+                        		$data['userProfile.emailAddress'] = $params['email'];
+                        		$data['cobSessionToken'] = $this->cobSessionToken->getToken();				
 
-		$response =  $this->SimpleRestJSON->get($GLOBALS['YodleeConfig']->COBURL.$endpoint, $data);
-		print_R($response);
+		$response =  $this->SimpleRestJSON->post($GLOBALS['YodleeConfig']->COBURL.$endpoint, $data);
 		try {
-			if(isset($response['ItemContainer'])){
+			if(isset($response['userContext'])){
 				return $response;					
 			}
 			else {
