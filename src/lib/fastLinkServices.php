@@ -4,7 +4,7 @@ class fastLinkServices{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "jsonsdk/OAuthAccessTokenManagementService/getOAuthAccessToken";	
 	//START Static From Documentaiton, never changes
-	private $fastLinkBase = "https://fastlink.yodlee.com/appscenter/fastlinksb/linkAccount.fastlinksb.action";	
+	private $fastLinkBase = $GLOBALS['YodleeConfig']->FASTLINKBASE;	
 	private  $bridgeAppID = "10003200";
 	private $oAuthKey = "a458bdf184d34c0cab7ef7ffbb5f016b";
 	private $oAuthSecret = "1ece74e1ca9e4befbb1b64daba7c4a24";

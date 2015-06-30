@@ -9,6 +9,8 @@ class Config{
     public $COBUsername = "";//CoBrand Username
     public $COBPassword = "";//CoBrand Password
     public $COBURL = "";
+    public $FASTLINKBASE = "";
+
 
     public function __construct($conf)
     {
@@ -17,6 +19,7 @@ class Config{
         $this->COBUsername = $conf['COBUsername'];
         $this->COBPassword = $conf['COBPassword'];
         $this->COBURL = $conf['COBURL'];
+        $this->FASTLINKBASE = $conf['FASTLINKBASE'];
         
     }
 }

@@ -73,7 +73,7 @@ class coreServices{
 
 		$response =  $this->SimpleRestJSON->get($GLOBALS['YodleeConfig']->COBURL.$endpoint, $data);
 		try {
-			if(isset($response['ItemContainer'])){
+                        		if(!isset($response['Error'])){			
 				return $response;					
 			}
 			else {
