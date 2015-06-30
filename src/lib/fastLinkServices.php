@@ -4,7 +4,7 @@ class fastLinkServices{
 	private  $SimpleRestJSON;	
 	private  $endpoint = "jsonsdk/OAuthAccessTokenManagementService/getOAuthAccessToken";	
 	//START Static From Documentaiton, never changes
-	private $fastLinkBase = $GLOBALS['YodleeConfig']->FASTLINKBASE;	
+	private $fastLinkBase = null;	
 	private  $bridgeAppID = "10003200";
 	private $oAuthKey = "a458bdf184d34c0cab7ef7ffbb5f016b";
 	private $oAuthSecret = "1ece74e1ca9e4befbb1b64daba7c4a24";
@@ -21,6 +21,7 @@ class fastLinkServices{
  		$this->token = null;
  		$this->cobSessionToken = $cobSessionToken;
  		$this->userSessionToken = $userSessionToken; 	
+ 		$this->fastLinkBase = $GLOBALS['YodleeConfig']->FASTLINKBASE;
  	}
 
  	public function getFastLinkURL(){
